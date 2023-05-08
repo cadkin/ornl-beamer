@@ -1,19 +1,19 @@
-LATEX = xelatex
-LATEXFLAGS = -halt-on-error
+LATEX 		:= xelatex
+LATEXFLAGS 	:= -halt-on-error
 
-SHOW = zathura
-SHOWFLAGS =
+SHOW 		:= zathura
+SHOWFLAGS 	:=
 
-SRC = target.tex
-TARGET = target
+SRC 		:= target.tex
+TARGET 		:= target
 
-all: $(TARGET_PDF)
+all: $(TARGET).pdf
 
 $(TARGET).pdf: $(SRC)
 	$(LATEX) $(LATEXFLAGS) -jobname="$(TARGET)" $(SRC)
 
 show: $(TARGET).pdf
-	$(SHOW) $(TARGET).pdf
+	$(SHOW) $(SHOWFLAGS) $(TARGET).pdf
 
 .PHONY: clean
 
