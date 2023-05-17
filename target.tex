@@ -14,10 +14,22 @@
 \usepackage{fontspec}
 \usepackage{listings}
 
-% Use Century Gothic font
+% Tikz packages
+\usetikzlibrary{fit}
+
+% Fonts
 \renewcommand{\familydefault}{\rmdefault}
-\defaultfontfeatures{Ligatures=TeX}
-\setmainfont[ExternalLocation=fonts/]{century_gothic.ttf}
+\defaultfontfeatures{Ligatures = TeX}
+
+\newfontfamily{\sourcecodepro}{SourceCodePro} [
+    ExternalLocation = fonts/,
+    Extension = .ttf
+]
+
+\setmainfont{CenturyGothic} [
+    ExternalLocation = fonts/,
+    Extension = .ttf
+]
 
 % Plot settings
 \usepgfplotslibrary{dateplot}
@@ -54,12 +66,17 @@
     citecolor=blue
 }
 
+% Tikz Layers
+\pgfdeclarelayer{nodelayer}
+\pgfdeclarelayer{edgelayer}
+\pgfsetlayers{nodelayer, edgelayer}
+
 % Macros
 % Get the theme name.
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 % New command to generate URL links and footers.
-\newcommand{\fnurl[2]}{
-    \href{#2}{#1}\footnote{\url{#2}}
+\newcommand{\fnurl}[2]{
+    \href{#2}{#1}\footnote{\fontsize{5pt}{5}\url{#2}}
 }
 % Fake item for lists in tables.
 \newcommand{\tabitem}{\textbullet \hspace{0.5em}}
@@ -85,21 +102,24 @@
     \textcolor{white}{ \insertdate }
 }
 
-
 % Code language setup
 \lstset{
     language=C++,
     frame=single,
-    basicstyle=\footnotesize\ttfamily,
+    basicstyle=\fontsize{5pt}{5}\sourcecodepro\color{black},
+    keywordstyle=\fontsize{5pt}{5}\sourcecodepro\color{blue}\bf,
+    commentstyle=\fontsize{5pt}{5}\sourcecodepro\color{gray},
+    numberstyle=\fontsize{5pt}{5}\sourcecodepro\color{gray}\bf,
+    stringstyle=\fontsize{5pt}{5}\sourcecodepro\color{purple}\bf,
     breaklines=true,
-    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
-    keywordstyle=\color{blue}\bf,
-    commentstyle=\usefont{T1}{pcr}{m}{sl}\color{darkgray},
     tabsize=4,
     numbers=left,
-    firstnumber=1
+    firstnumber=1,
+    xleftmargin=2em,
+    classoffset=1,
+    morekeywords={Constants, Settings},
+    keywordstyle=\color{teal}
 }
-
 % Presentation info
 \title{The Title}
 \subtitle{The Subtitle}
